@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Baggy Jeans",
+        "description": "Comfortable wide leg style...",
+        "price": 79.99,
+        "image": "https://res.cloudinary.com/dfmghlngf/image/upload/v1757256885/vp2x7xur7czlsgiahzgk.jpg",
+        "category": "Baggy"
+    },
+    {
+        "id": 2,
+        "name": "Bootcut Jeans",
+        "description": "Comfortable wide leg style...",
+        "price": 79.99,
+        "image": "https://res.cloudinary.com/dfmghlngf/image/upload/v1757529543/gh45edtwep1bs1rokleu.jpg",
+        "category": "Baggy"
+    },
+    {
+        "id": 1,
+        "name": "Baggy Jeans",
+        "description": "Comfortable wide leg style...",
+        "price": 79.99,
+        "image": "https://res.cloudinary.com/dfmghlngf/image/upload/v1757256885/vp2x7xur7czlsgiahzgk.jpg",
+        "category": "Baggy"
+    },
+    {
+        "id": 2,
+        "name": "Bootcut Jeans",
+        "description": "Comfortable wide leg style...",
+        "price": 79.99,
+        "image": "https://res.cloudinary.com/dfmghlngf/image/upload/v1757529543/gh45edtwep1bs1rokleu.jpg",
+        "category": "Baggy"
+    },
+    {
+        "id": 2,
+        "name": "Bootcut Jeans",
+        "description": "Comfortable wide leg style...",
+        "price": 79.99,
+        "image": "https://res.cloudinary.com/dfmghlngf/image/upload/v1757529543/gh45edtwep1bs1rokleu.jpg",
+        "category": "Baggy"
+    }
+]
