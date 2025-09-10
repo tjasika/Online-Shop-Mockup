@@ -9,7 +9,7 @@ export const Card = ({id, name, image, price}) => {
                 </div>
                 <div className="flex flex-col gap-1">
                     <span className="uppercase">{name}</span>
-                    <span className="font-medium">{price}</span>
+                    <span className="font-medium">$ {price}</span>
                 </div>
             </div>
         </Link>

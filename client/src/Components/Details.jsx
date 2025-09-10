@@ -28,7 +28,9 @@ export default function Details(){
                     </div>
 
                     {/*Right Side*/}
-                    <div>
+                    <div className="flex flex-col justify-center items-left">
+                        <h1 className="uppercase font-instrument text-3xl">{product.name}</h1>
+                        <h2 className="text-3xl font-medium">$ {product.price}</h2>
                         <button 
                         onClick={()=>navigate('/')}
                         className="hover:cursor-pointer"
