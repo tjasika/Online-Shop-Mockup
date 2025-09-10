@@ -1,7 +1,10 @@
 import { NavButton } from "./NavButton"
+import { useNavigate } from "react-router-dom"
 
 export const AppHeader = () => {
+    const navigate = useNavigate();
     const buttonIcons = ["/icons/person.svg", "/icons/bookmark.svg", "/icons/bag.svg"]
+    const paths = ["/login", "/saved", "/cart"]
     return (
         <header className="flex flex-row justify-between">
             <div>
@@ -9,7 +12,7 @@ export const AppHeader = () => {
             </div>
             <div className="flex flex-row gap-5">
                 {buttonIcons.map((icon, index)=> (
-                    <NavButton key={index} icon={buttonIcons[index]} />
+                    <NavButton key={index} icon={buttonIcons[index]} onClick={()=>navigate(paths[index])} />
                 ))}
             </div>
         </header>

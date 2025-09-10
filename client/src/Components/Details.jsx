@@ -1,5 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom"
 import products from '../Data/temp.json'
+import { AppHeader } from "./AppHeader";
 
 export default function Details(){
     const {id} = useParams();
@@ -14,15 +15,30 @@ export default function Details(){
     }
 
     return (
-        <div>
-             <div className="w-200 h-140">
-                <img className="object-cover w-full h-full rounded-lg" src={product.image}></img>
+        <>
+            <div className="pt-6 pb-6 pl-20 pr-20">
+                <div className="pb-3">
+                    <AppHeader />
+                </div>
+
+                <div className="flex flex-row gap-20">
+                    {/* Left Side */}
+                    <div className="w-113 h-150">
+                        <img className="object-cover w-full h-full" src={product.image}></img>
+                    </div>
+
+                    {/*Right Side*/}
+                    <div>
+                        <button 
+                        onClick={()=>navigate('/')}
+                        className="hover:cursor-pointer"
+                        >
+                            <img src="/icons/arrow-return-left.svg"></img>
+                        </button>
+                    </div>
+                </div>
+               
             </div>
-             <button 
-                onClick={()=>navigate('/')}
-                className="w-40 bg-zinc-200">
-                    Back
-                </button>
-        </div>
+        </>
     )
 }

@@ -19,7 +19,7 @@ function App() {
 
   return (
     <>
-      <div className='p-6'>
+      <div className='pt-6 pb-6 pl-20 pr-20'>
         <div className='pb-8'>
           <AppHeader />
         </div>
