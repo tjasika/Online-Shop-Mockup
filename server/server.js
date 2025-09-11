@@ -23,8 +23,15 @@ db.connect((err) => {
     }
 });
 
-app.get('/', (req, res) => {
-    res.json({message: "Hello World"})
+app.get('/api/sizes', (req, res) => {
+    const query = `SELECT * FROM size`;
+    db.query(query, (err, results) => {
+        if(err) {
+            res.status(500).json({error: err});
+        } else {
+            res.json(results);
+        }
+    })
 })
 
 app.listen(5000, () => {
