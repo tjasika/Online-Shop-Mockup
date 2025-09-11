@@ -28,8 +28,8 @@ export default function Details(){
                     </div>
 
                     {/*Right Side*/}
-                    <div className="flex flex-col justify-center items-left">
-                        <h1 className="uppercase font-instrument text-3xl">{product.name}</h1>
+                    <div className="flex flex-col justify-center items-left font-instrument">
+                        <h1 className="uppercase text-3xl">{product.name}</h1>
                         <h2 className="text-3xl font-medium">$ {product.price}</h2>
                         <button 
                         onClick={()=>navigate('/')}
