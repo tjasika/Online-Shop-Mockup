@@ -1,16 +1,30 @@
 import { useNavigate, useParams } from "react-router-dom"
-import products from '../Data/temp.json'
 import { AppHeader } from "./AppHeader";
+import { useState, useEffect } from "react";
+import axios from 'axios';
 
 export default function Details(){
     const {id} = useParams();
     const navigate = useNavigate();
 
-    const product = products.find((product) => String(product.id) === id);
+    const [product, setProduct] = useState(null);
+    useEffect(() => {
+        const fetchProduct = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/products/${id}`);
+                setProduct(response.data);
+            } catch(err) {
+                console.error('Error fetching products:', err);
+            }
+        };
+        fetchProduct();
+    }, [id])
 
     if(!product) {
         return (
-            <div>Product Not Found</div>
+            <div>
+                Product Not Found
+            </div>
         )
     }
 
@@ -24,7 +38,7 @@ export default function Details(){
                 <div className="flex flex-row gap-20">
                     {/* Left Side */}
                     <div className="w-113 h-150">
-                        <img className="object-cover w-full h-full" src={product.image}></img>
+                        <img className="object-cover w-full h-full" src={product.image1}></img>
                     </div>
 
                     {/*Right Side*/}

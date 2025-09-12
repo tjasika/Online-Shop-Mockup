@@ -1,23 +1,34 @@
-import { useState, useMemo } from 'react'
-import products from './Data/temp.json'
+import { useState, useMemo, useEffect } from 'react'
+import axios from 'axios'
 import './index.css'
 import { AppHeader } from './Components/AppHeader.jsx'
 import { FilterButton } from './Components/FilterButton.jsx'
 import { CardsContainer } from './Components/CardsContainer.jsx'
 
-import TestSizes from './Components/Test/TestSizes.jsx';
-
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  const visible = useMemo(()=> {
-    if(selectedCategory == "All") {
-      return products;
-    }
-    return products.filter(product => product.category == selectedCategory);
-  }, [selectedCategory])
+  const [products, setProducts] = useState([]);
 
   const categories = ["All", "Bootcut", "Wide-Leg", "Mom", "Skinny", "Baggy", "Straight", "Shorts"];
+
+  useEffect(() => {
+        const fetchProducts = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/products');
+                setProducts(response.data);
+            } catch (err) {
+                console.error('Error:', err)
+            }
+        }
+        fetchProducts();
+    }, [])
+
+    const visible = useMemo(()=> {
+      if(selectedCategory == "All") {
+        return products;
+      }
+      return products.filter(product => product.category_name == selectedCategory);
+    }, [selectedCategory, products])
 
   return (
     <>
@@ -38,7 +49,6 @@ function App() {
         </div>
 
         <CardsContainer products={visible} />
-        <TestSizes />
       </div>
     </>
   )

@@ -1,4 +1,5 @@
 import { Card } from "./Card"
+
 export const CardsContainer = ({products}) => {
     return (
         <div className="grid grid-cols-5 gap-10 w-full">
