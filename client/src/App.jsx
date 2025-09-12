@@ -5,6 +5,8 @@ import { AppHeader } from './Components/AppHeader.jsx'
 import { FilterButton } from './Components/FilterButton.jsx'
 import { CardsContainer } from './Components/CardsContainer.jsx'
 
+import TestSizes from './Components/Test/TestSizes.jsx';
+
 function App() {
   const [selectedCategory, setSelectedCategory] = useState("All");
 
@@ -36,6 +38,7 @@ function App() {
         </div>
 
         <CardsContainer products={visible} />
+        <TestSizes />
       </div>
     </>
   )
