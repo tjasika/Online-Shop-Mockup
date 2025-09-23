@@ -11,7 +11,7 @@ export default function Signup() {
                             <img src="/icons/arrow-return-left.svg"></img>
                     </button>
                     <div className='mt-5'>
-                        <h1 className='text-2xl font-instrumental font-medium'>Log In</h1>
+                        <h1 className='text-2xl font-instrumental font-medium'>Sign Up</h1>
                         <div className='mt-3 w-200'>
                              <form className="flex flex-col gap-4">
                                 <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="text" name="firstName" placeholder="First Name"></input>
