@@ -18,6 +18,7 @@ export default function Signup() {
                                 <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="text" name="lastName" placeholder="Last Name"></input>
                                 <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="text" name="email" placeholder="Email"></input>
                                 <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="password" name="password" placeholder="Password"></input>
+                                <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="password" name="confirmPassword" placeholder="Confirm Password"></input>
                                 <button className="bg-zinc-700 text-white border-zinc-900 p-3 rounded-xl w-100 hover:cursor-pointer hover:bg-zinc-600" 
                                 type="submit">Sign Up</button>
                             </form>
