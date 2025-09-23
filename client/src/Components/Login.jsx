@@ -1,4 +1,4 @@
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import { AppHeader } from './AppHeader';
 
 export default function Login() {
@@ -7,10 +7,24 @@ export default function Login() {
             <>
                 <div className='pt-6 pb-6 pl-20 pr-20'>
                     <AppHeader />
-                    <h1>Log In</h1>
                     <button onClick={()=>navigate('/')} className="hover:cursor-pointer">
-                        <img src="/icons/arrow-return-left.svg"></img>
+                            <img src="/icons/arrow-return-left.svg"></img>
                     </button>
+                    <div className='mt-5'>
+                        <h1 className='text-2xl font-instrumental font-medium'>Log In</h1>
+                        <div className='mt-3 w-200'>
+                             <form className="flex flex-col gap-4">
+                                <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="text" name="email" placeholder="Email"></input>
+                                <input className="h-10 p-3 outline outline-neutral-400 rounded-md" type="password" name="password" placeholder="Password"></input>
+                                <button className="bg-zinc-700 text-white border-zinc-900 p-3 rounded-xl w-100 hover:cursor-pointer hover:bg-zinc-600" 
+                                type="submit">Log In</button>
+                            </form>
+                            <div className='mt-5'>
+                                <span>Don't have an account? </span>
+                                <Link to='/signup' className='font-bold text-zinc-700 hover:underline'>Sign Up</Link>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </>
         )
