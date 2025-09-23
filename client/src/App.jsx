@@ -27,7 +27,7 @@ function App() {
       if(selectedCategory == "All") {
         return products;
       }
-      return products.filter(product => product.category_name == selectedCategory);
+      return products.filter(product => product.category == selectedCategory);
     }, [selectedCategory, products])
 
   return (

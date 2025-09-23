@@ -37,8 +37,8 @@ export default function Details(){
 
                 <div className="flex flex-row gap-20">
                     {/* Left Side */}
-                    <div className="w-113 h-150">
-                        <img className="object-cover w-full h-full" src={product.image1}></img>
+                    <div className="w-110 h-150">
+                        <img className="object-cover w-full h-full" src={product.image}></img>
                     </div>
 
                     {/*Right Side*/}

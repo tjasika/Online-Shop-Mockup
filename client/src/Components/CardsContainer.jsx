@@ -7,7 +7,8 @@ export const CardsContainer = ({products}) => {
                 <Card 
                     key={product.id}
                     id={product.id} 
-                    image={product.image} 
+                    image={product.image}
+                    image2={product.image2} 
                     name={product.name} 
                     price={product.price}
                 />

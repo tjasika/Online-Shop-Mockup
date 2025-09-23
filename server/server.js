@@ -43,6 +43,8 @@ app.get('/api/products', (req, res) => {
             p.Description as description,
             p.Price as price, 
             p.Primary_img_url as image,
+            p.Secondary_img1_url as image2,
+            p.Secondary_img2_url as image3,
             c.Name as category
         FROM Product p
         JOIN Category c ON p.Category_Id = c.Id`;
