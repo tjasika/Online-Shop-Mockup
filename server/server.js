@@ -3,6 +3,8 @@ const session = require('express-session')
 const mysql = require('mysql2');
 const cors = require('cors');
 require('dotenv').config();
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 
 const app = express();
 app.use(cors());
@@ -35,6 +37,8 @@ app.get('/api/sizes', (req, res) => {
     })
 })
 
+
+//GET Routes
 app.get('/api/products', (req, res) => {
     const query = `
         SELECT 
@@ -94,6 +98,34 @@ app.get('/api/categories', (req, res) => {
             res.json(results);
         }
     })
+})
+
+//POST Routes
+app.post('/api/signup', async (req, res) => {
+    try {
+        const {firstName, lastName, email, password } = req.body;
+        const checkQuery = `SELECT * FROM Customer WHERE Email = ?`;
+        const insertQuery = `INSERT INTO Customer (First_name, Last_name, Email, Password) VALUES (?, ?, ?, ?)`
+        db.query(checkQuery, [email], async (err, results) => {
+            if(err) {
+                return res.status(500).json({error: "Database error."})
+            }
+            if(results.length > 0) {
+                return res.status(400).json({message: "User with this email already exists."});
+            }
+            const saltRounds = 10;
+            const hashedPassword = await bcrypt.hash(password, saltRounds);
+            db.query(insertQuery, [firstName, lastName, email, hashedPassword], async (err, results) => {
+                if(err) {
+                    return res.status(500).json({error: "Database error."});
+                }
+                res.status(201).json({ message: 'User created successfully' });
+            });
+        })
+
+    } catch(error) {
+        console.error("Error:", error);
+    }
 })
 
 app.listen(5000, () => {
