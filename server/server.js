@@ -7,7 +7,12 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 
 const app = express();
-app.use(cors());
+
+app.use(cors({
+  origin: "http://localhost:5173",   
+  credentials: true                
+}));
+
 app.use(express.json());
 
 const db = mysql.createConnection({
@@ -16,6 +21,16 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME,
     password: process.env.DB_PASSWORD
 });
+
+app.use(session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        secure: false, 
+        maxAge: 24 * 60 * 60 * 1000
+    }
+}))
 
 db.connect((err) => {
     if (err) {
@@ -100,6 +115,29 @@ app.get('/api/categories', (req, res) => {
     })
 })
 
+app.get('/api/check-session', (req, res) => {
+    if(req.session.userId) {
+        const query = `SELECT Id, First_name, Last_name, Email FROM Customer WHERE Id = ?`;
+        db.query(query, [req.session.userId], (err, results) => {
+            if(err || results.length === 0) {
+                return res.status(401).json({ isLoggedIn: false });
+            }
+            const user = results[0];
+            res.json({ 
+                isLoggedIn: true,
+                user: {
+                    id: user.Id,
+                    firstName: user.First_name,
+                    lastName: user.Last_name,
+                    email: user.Email
+                }
+            });
+        })
+    } else {
+        res.json({ isLoggedIn: false });
+    }
+})
+
 //POST Routes
 app.post('/api/signup', async (req, res) => {
     try {
@@ -126,6 +164,54 @@ app.post('/api/signup', async (req, res) => {
     } catch(error) {
         console.error("Error:", error);
     }
+})
+
+app.post('/api/login', (req, res) => {
+    try {
+        const {email, password} = req.body;
+        const query = (`SELECT * FROM Customer WHERE Email = ?`);
+        db.query(query, [email], async (err, results) => {
+            if(err) {
+                return res.status(500).json({error: "Database error."});
+            }
+            if(results.length === 0) {
+                return res.status(401).json({message: "Invalid email or password."});
+            }
+
+            const user = results[0];
+            const isMatch = await bcrypt.compare(password, user.Password);
+            if(!isMatch) {
+                return res.status(401).json({message: "Invalid email or password."});
+            }
+
+            req.session.userId = user.Id;
+            req.session.userEmail = user.Email;
+            
+
+            res.json({ 
+                message: 'Login successful',
+                user: {
+                    id: user.Id,
+                    firstName: user.First_name,
+                    lastName: user.Last_name,
+                    email: user.Email
+                }
+            });
+        })
+    } catch(error) {
+         console.error("Error:", error);
+         res.status(500).json({ error: 'Server error' });
+    }
+})
+
+app.post('api/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json({ error: 'Could not log out' });
+        }
+        res.clearCookie('connect.sid');
+        res.json({ message: 'Logout successful' });
+    });
 })
 
 app.listen(5000, () => {

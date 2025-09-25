@@ -6,8 +6,13 @@ import { FilterButton } from './Components/FilterButton.jsx'
 import { CardsContainer } from './Components/CardsContainer.jsx'
 
 function App() {
+
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [products, setProducts] = useState([]);
+
+  const [user, setUser] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
 
   const categories = ["All", "Bootcut", "Wide-Leg", "Mom", "Skinny", "Baggy", "Straight", "Shorts"];
 
@@ -23,6 +28,35 @@ function App() {
         fetchProducts();
     }, [])
 
+    useEffect(() => {
+      const checkSession = async () => {
+        try {
+          const response = await axios.get('http://localhost:5000/api/check-session');
+          if (response.data.isLoggedIn) {
+            setUser(response.data.user);
+            setIsLoggedIn(true);
+          }
+        } catch (error) {
+          console.log('No active session');
+        } finally {
+          setIsLoading(false);
+        }
+      };
+
+      checkSession();
+    }, []);
+
+    const handleLogout = async () => {
+      try {
+        await axios.post('http://localhost:5000/api/logout');
+        setUser(null);
+        setIsLoggedIn(false);
+      } catch (error) {
+        console.log('Logout error:', error);
+      }
+    };
+
+
     const visible = useMemo(()=> {
       if(selectedCategory == "All") {
         return products;
@@ -34,7 +68,10 @@ function App() {
     <>
       <div className='pt-6 pb-6 pl-20 pr-20'>
         <div className='pb-8'>
-          <AppHeader />
+          <AppHeader isLoggedIn={isLoggedIn} />
+          {isLoggedIn && 
+            <h2>Hello, {user?.firstName}</h2> 
+          }
         </div>
 
         <div className='flex flex-row gap-5 pb-6'>

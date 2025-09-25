@@ -5,6 +5,7 @@ import Saved from './Components/Saved.jsx';
 import Login from './Components/Login.jsx';
 import App from './App.jsx';
 import Signup from './Components/Signup.jsx';
+import Account from './Components/Account.jsx';
 
 export const AppRoutes = () => {
     return (
@@ -13,6 +14,7 @@ export const AppRoutes = () => {
             <Route path="/saved" element={<Saved />} />
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="/account" element={<Account />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/products/:id" element={<Details />} />
             <Route path="*" element={<Navigate to="/" replace />} />

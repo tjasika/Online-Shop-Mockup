@@ -1,10 +1,14 @@
 import { NavButton } from "./NavButton"
 import { useNavigate } from "react-router-dom"
 
-export const AppHeader = () => {
+export const AppHeader = ({isLoggedIn}) => {
     const navigate = useNavigate();
     const buttonIcons = ["/icons/person.svg", "/icons/bookmark.svg", "/icons/bag.svg"]
-    const paths = ["/login", "/saved", "/cart"]
+    const paths = [
+        isLoggedIn? "/account":"/login", 
+        "/saved", 
+        "/cart"
+    ]
     return (
         <header className="flex flex-row justify-between">
             <div>
