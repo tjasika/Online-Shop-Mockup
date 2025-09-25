@@ -1,4 +1,4 @@
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Details from './Components/Details.jsx';
@@ -10,6 +10,7 @@ import Signup from './Components/Signup.jsx';
 import Account from './Components/Account.jsx';
 
 export const AppRoutes = () => {
+    const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
@@ -17,7 +18,7 @@ export const AppRoutes = () => {
     useEffect(() => {
       const checkSession = async () => {
         try {
-          const response = await axios.get('http://localhost:5000/api/check-session');
+          const response = await axios.get('http://localhost:5000/api/check-session', { withCredentials: true });
           if (response.data.isLoggedIn) {
             setUser(response.data.user);
             setIsLoggedIn(true);
@@ -34,9 +35,10 @@ export const AppRoutes = () => {
 
     const handleLogout = async () => {
       try {
-        await axios.post('http://localhost:5000/api/logout');
+        await axios.post('http://localhost:5000/api/logout', {}, { withCredentials: true });
         setUser(null);
         setIsLoggedIn(false);
+        navigate('/');
       } catch (error) {
         console.log('Logout error:', error);
       }
