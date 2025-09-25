@@ -1,2 +1,1 @@
-# Online Shop Mockup
-
+# Online Shop Mockup 🛍️
