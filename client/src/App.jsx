@@ -5,14 +5,10 @@ import { AppHeader } from './Components/AppHeader.jsx'
 import { FilterButton } from './Components/FilterButton.jsx'
 import { CardsContainer } from './Components/CardsContainer.jsx'
 
-function App() {
+function App({ user, isLoggedIn }) {
 
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [products, setProducts] = useState([]);
-
-  const [user, setUser] = useState(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const categories = ["All", "Bootcut", "Wide-Leg", "Mom", "Skinny", "Baggy", "Straight", "Shorts"];
 
@@ -27,35 +23,6 @@ function App() {
         }
         fetchProducts();
     }, [])
-
-    useEffect(() => {
-      const checkSession = async () => {
-        try {
-          const response = await axios.get('http://localhost:5000/api/check-session');
-          if (response.data.isLoggedIn) {
-            setUser(response.data.user);
-            setIsLoggedIn(true);
-          }
-        } catch (error) {
-          console.log('No active session');
-        } finally {
-          setIsLoading(false);
-        }
-      };
-
-      checkSession();
-    }, []);
-
-    const handleLogout = async () => {
-      try {
-        await axios.post('http://localhost:5000/api/logout');
-        setUser(null);
-        setIsLoggedIn(false);
-      } catch (error) {
-        console.log('Logout error:', error);
-      }
-    };
-
 
     const visible = useMemo(()=> {
       if(selectedCategory == "All") {
