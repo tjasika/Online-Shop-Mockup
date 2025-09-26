@@ -13,7 +13,6 @@ export const AppRoutes = () => {
     const navigate = useNavigate();
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
       const checkSession = async () => {
@@ -25,8 +24,6 @@ export const AppRoutes = () => {
           }
         } catch (error) {
           console.log('No active session');
-        } finally {
-          setIsLoading(false);
         }
       };
 
