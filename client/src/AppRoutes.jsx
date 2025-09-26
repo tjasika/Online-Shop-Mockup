@@ -33,22 +33,30 @@ export const AppRoutes = () => {
       checkSession();
     }, []);
 
+    const handleLoginSuccess = (userData) => {
+        setUser(userData);
+        setIsLoggedIn(true);
+    };
+
     const handleLogout = async () => {
-      try {
-        await axios.post('http://localhost:5000/api/logout', {}, { withCredentials: true });
-        setUser(null);
-        setIsLoggedIn(false);
-        navigate('/');
-      } catch (error) {
-        console.log('Logout error:', error);
+      if (window.confirm("Log Out?")) {
+        try {
+          await axios.post('http://localhost:5000/api/logout', {}, { withCredentials: true });
+          setUser(null);
+          setIsLoggedIn(false);
+          navigate('/');
+        } catch (error) {
+          console.log('Logout error:', error);
+        }
       }
+      
     };
 
     return (
         <Routes>
             <Route path="/" element={<App user={user} isLoggedIn={isLoggedIn}/>} />
             <Route path="/saved" element={<Saved />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess}/>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
             <Route path="/cart" element={<Cart />} />

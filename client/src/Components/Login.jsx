@@ -3,7 +3,7 @@ import { AppHeader } from './AppHeader';
 import axios from 'axios';
 import { useState } from 'react';
 
-export default function Login() {
+export default function Login({onLoginSuccess}) {
     const navigate = useNavigate();
     const [values, setValues] = useState({
         email: "", 
@@ -29,6 +29,8 @@ export default function Login() {
             setMsg("Login successful!");
             console.log("User data:", response.data.user);
             
+            onLoginSuccess(response.data.user);
+
             navigate('/');
             
         } catch (error) {

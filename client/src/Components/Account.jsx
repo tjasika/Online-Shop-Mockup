@@ -10,15 +10,16 @@ export default function Account({user, onLogout}) {
             <button onClick={()=>navigate('/')} className="hover:cursor-pointer">
                     <img src="/icons/arrow-return-left.svg"></img>
             </button>
-            <div>
-                <h1>{user?.firstName}</h1>
-                <h1>{user?.lastName}</h1>
+            <div className="pt-5">
+                <h1 className="font-instrument font-medium text-3xl pb-3">Account</h1>
+                <div className="pb-3">
+                    <p>First name: <span className="font-medium">{user?.firstName}</span></p>
+                    <p>Last name: <span className="font-medium">{user?.lastName}</span></p>
+                    <p>Email: <span className="font-medium">{user?.email}</span></p>
+                </div>
                 <button 
-                    className="hover:cursor-pointer" 
-                    onClick={()=> {
-                        console.log("Logout button clicked");
-                         onLogout();
-                    }}>Log Out
+                    className="w-30 outline border-zinc-900 p-1 rounded-3xl text-md hover:cursor-pointer hover:bg-zinc-700 hover:text-white" 
+                    onClick={()=> {onLogout();}}>Log Out
                 </button>
             </div>
         </div>
