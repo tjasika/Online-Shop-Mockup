@@ -8,7 +8,8 @@ export default function Details(){
     const navigate = useNavigate();
 
     const [product, setProduct] = useState(null);
-    const [sizes, setSizes] = useState(null);
+    const [sizes, setSizes] = useState([]);
+    const [colors, setColors] = useState([]);
     
     useEffect(() => {
         const fetchProduct = async () => {
@@ -22,14 +23,6 @@ export default function Details(){
         fetchProduct();
     }, [id])
 
-    if(!product) {
-        return (
-            <div>
-                Product Not Found
-            </div>
-        )
-    }
-
      useEffect(() => {
         const fetchSizes = async () => {
             try {
@@ -42,12 +35,40 @@ export default function Details(){
         fetchSizes();
     }, [id])
 
+    useEffect(() => {
+        const fetchColors = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/products/${id}/colors`);
+                setColors(response.data);
+            } catch(err) {
+                console.error('Error fetching colors:', err);
+            }
+        };
+        fetchColors();
+    }, [id])
+
+    console.log("Sizes state:", sizes);
+
+    if(!product) {
+        return (
+            <div>
+                Product Not Found
+            </div>
+        )
+    }
+
 
     return (
         <>
             <div className="pt-6 pb-6 pl-20 pr-20">
                 <div className="pb-3">
                     <AppHeader />
+                    <button 
+                        onClick={()=>navigate('/')}
+                        className="hover:cursor-pointer"
+                        >
+                            <img src="/icons/arrow-return-left.svg"></img>
+                    </button>
                 </div>
 
                 <div className="flex flex-row gap-20">
@@ -60,12 +81,12 @@ export default function Details(){
                     <div className="flex flex-col justify-center items-left font-instrument">
                         <h1 className="uppercase text-3xl">{product.name}</h1>
                         <h2 className="text-3xl font-medium">$ {product.price}</h2>
-                        <button 
-                        onClick={()=>navigate('/')}
-                        className="hover:cursor-pointer"
-                        >
-                            <img src="/icons/arrow-return-left.svg"></img>
-                        </button>
+                        {sizes.map((size) => (
+                            <h1 key={size.Id}>{size.Name}</h1>
+                        ))}
+                        {colors.map((color) => (
+                            <h1 key={color.Id}>{color.Name}</h1>
+                        ))}
                     </div>
                 </div>
                
