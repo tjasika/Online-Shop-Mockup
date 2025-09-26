@@ -52,7 +52,7 @@ export const AppRoutes = () => {
     return (
         <Routes>
             <Route path="/" element={<App user={user} isLoggedIn={isLoggedIn}/>} />
-            <Route path="/saved" element={<Saved />} />
+            <Route path="/saved" element={<Navigate to="/" replace />} />
             <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess}/>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
