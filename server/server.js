@@ -104,6 +104,44 @@ app.get('/api/products/:id', (req, res) => {
     });
 });
 
+app.get('/api/products/:id/sizes', (req, res) => {
+    const productId = req.params.id;
+    const query = `
+        SELECT s.Id, s.Name 
+        FROM Size s
+        JOIN Product_has_size phs ON s.Id = phs.size_id
+        WHERE phs.product_id = ?
+        `
+    db.query(query, [productId], (err, results) => {
+        if(err) {
+            res.status(500).json({error: err})
+        } else if (results.length === 0) {
+            res.status(404).json({message: "Sizes not found"});
+        } else {
+            res.json(results);
+        }
+    })
+});
+
+app.get('/api/products/:id/colors', (req, res) => {
+    const productId = req.params.id;
+    const query = `
+        SELECT c.Id, c.Name 
+        FROM Color c
+        JOIN Product_has_color phc ON c.Id = phc.color_id  
+        WHERE phc.product_id = ?
+    `;
+    db.query(query, [productId], (err, results) => {
+        if(err) {
+            res.status(500).json({error: err})
+        } else if (results.length === 0) {
+            res.status(404).json({message: "Colors not found"});
+        } else {
+            res.json(results);
+        }
+    })
+})
+
 app.get('/api/categories', (req, res) => {
     const query = `SELECT Name FROM Category`;
      db.query(query, (err, results) => {

@@ -8,6 +8,8 @@ export default function Details(){
     const navigate = useNavigate();
 
     const [product, setProduct] = useState(null);
+    const [sizes, setSizes] = useState(null);
+    
     useEffect(() => {
         const fetchProduct = async () => {
             try {
@@ -27,6 +29,19 @@ export default function Details(){
             </div>
         )
     }
+
+     useEffect(() => {
+        const fetchSizes = async () => {
+            try {
+                const response = await axios.get(`http://localhost:5000/api/products/${id}/sizes`);
+                setSizes(response.data);
+            } catch(err) {
+                console.error('Error fetching sizes:', err);
+            }
+        };
+        fetchSizes();
+    }, [id])
+
 
     return (
         <>
