@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import Details from './Components/Details.jsx';
 import Cart from './Components/Cart.jsx';
-import Saved from './Components/Saved.jsx';
 import Login from './Components/Login.jsx';
 import App from './App.jsx';
 import Signup from './Components/Signup.jsx';

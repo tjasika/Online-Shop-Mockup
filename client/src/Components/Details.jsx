@@ -10,6 +10,10 @@ export default function Details(){
     const [product, setProduct] = useState(null);
     const [sizes, setSizes] = useState([]);
     const [colors, setColors] = useState([]);
+
+    const [selectedSize, setSelectedSize] = useState(null);
+    const [selectedColor, setSelectedColor] = useState(null);
+    
     
     useEffect(() => {
         const fetchProduct = async () => {
@@ -81,12 +85,24 @@ export default function Details(){
                     <div className="flex flex-col justify-center items-left font-instrument">
                         <h1 className="uppercase text-3xl">{product.name}</h1>
                         <h2 className="text-3xl font-medium">$ {product.price}</h2>
-                        {sizes.map((size) => (
-                            <h1 key={size.Id}>{size.Name}</h1>
-                        ))}
-                        {colors.map((color) => (
-                            <h1 key={color.Id}>{color.Name}</h1>
-                        ))}
+
+                        <div className="grid grid-cols-4 gap-3 pt-5 pb-5 w-100 ">
+                            {sizes.map((size) => (
+                                <button 
+                                    className={selectedSize === size.Id ? "bg-zinc-700 text-white rounded-xl w-20" : "border-1 rounded-xl w-20 hover:cursor-pointer hover:bg-zinc-700 hover:text-white"} 
+                                    key={size.Id}
+                                    onClick={()=> setSelectedSize(size.Id)}>
+                                    {size.Name}
+                                </button>
+                            ))}
+                        </div>
+                       
+                        <div>
+                            {colors.map((color) => (
+                                <h1 key={color.Id}>{color.Name}</h1>
+                            ))}
+                        </div>
+                        
                     </div>
                 </div>
                
