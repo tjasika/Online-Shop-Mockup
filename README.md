@@ -34,6 +34,7 @@ Every page has an **AppHeader.jsx** component, that displays the main title and 
 #### Products Display and Filtering
 The **App.jsx** component is basically the 'main page'. Each product is displayed in a **Card.jsx** component, which shows its primary image, name and price. When hovered, the image fades into the secondary image.
 The filtering logic is the same as in my "Cocktails" project: made with **useState** and **useMemo** hooks. (https://github.com/tjasika/Cocktails)
+I do not own the images, I downloaded them from Pinterest and stored them in a cloud with **Cloudinary**, then just stored those links in my database for the image src.
 ![Screenshot of the project](/github_assets/ss1.png)
 
 #### Details Page
