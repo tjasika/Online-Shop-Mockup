@@ -3,7 +3,7 @@ import { AppHeader } from "./AppHeader";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-export default function Details(){
+export default function Details(addToCart){
     const {id} = useParams();
     const navigate = useNavigate();
 
@@ -106,6 +106,14 @@ export default function Details(){
                                     {color.Name}
                                 </button>
                             ))}
+                        </div>
+
+                        <div>
+                            <button 
+                                className="w-80 h-10 bg-zinc-700 text-white rounded-xl hover:cursor-pointer"
+                                onClick={()=> addToCart(product.Id, size.Id, color.Id)}>
+                                Add to cart
+                            </button>
                         </div>
                         
                     </div>

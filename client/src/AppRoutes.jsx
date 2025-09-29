@@ -48,6 +48,19 @@ export const AppRoutes = () => {
       
     };
 
+    //Cart
+    const[cartItems, setCartItems] = useState([]);
+
+    const addToCart = (productId, sizeId, colorId, quantity = 1) => {
+      const newItem = {
+        productId: productId,
+        sizeId: sizeId, 
+        colorId: colorId,
+        quantity: quantity
+      };
+      setCartItems([...cartItems, newItem]);
+    }
+
     return (
         <Routes>
             <Route path="/" element={<App user={user} isLoggedIn={isLoggedIn}/>} />
@@ -56,7 +69,7 @@ export const AppRoutes = () => {
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
             <Route path="/cart" element={<Cart />} />
-            <Route path="/products/:id" element={<Details />} />
+            <Route path="/products/:id" element={<Details addTocart={addToCart}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )
