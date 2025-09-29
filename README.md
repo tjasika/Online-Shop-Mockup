@@ -33,6 +33,14 @@ Every page has an **AppHeader.jsx** component, that displays the main title and 
 
 #### Products Display and Filtering
 The **App.jsx** component is basically the 'main page'. Each product is displayed in a **Card.jsx** component, which shows its primary image, name and price. When hovered, the image fades into the secondary image.
-The filtering logic is the same as in my "Cocktails" project: made with **useState** and **useMemo** hooks.
+The filtering logic is the same as in my "Cocktails" project: made with **useState** and **useMemo** hooks. (https://github.com/tjasika/Cocktails)
 ![Screenshot of the project](/github_assets/ss1.png)
+
+#### Details Page
+The **Details.jsx** displays the product in detail, showing its image, name, price, as well as available colors and sizes, from which the user chooses.
+![Screenshot of the project](/github_assets/ss3.png)
+(I still need to add the feature of displaying multiple images)
+
+## Back-end (Node.js with Express)
+
 
