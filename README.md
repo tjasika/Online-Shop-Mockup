@@ -27,7 +27,7 @@ For the sake of the project, the products, colors and sizes (as well as the junc
 The whole project is made up of 13 components. The main ones are:
 - **App.jsx**
 - **AppRoutes.jsx**
-- **main.jsx**
+- **main.jsx**  
 The **AppRoutes** component connects all the other components together and passes global variables or functions to those that need them (e.g. the user). It also handles *routes* and navigating.
 Every page has an **AppHeader.jsx** component, that displays the main title and nav buttons: *account, saved* and *cart* (but the 'saved' button is there only for display, it doesn't actually do anything).
 
@@ -41,6 +41,26 @@ The **Details.jsx** displays the product in detail, showing its image, name, pri
 ![Screenshot of the project](/github_assets/ss3.png)
 (I still need to add the feature of displaying multiple images)
 
+The styling and the design are definitely not the most UX friendly - it was not my main focus for this project.
+
 ## Back-end (Node.js with Express)
+I put all the API routes in a **server.js** file, like I am used to from previous full-stack projects.
+#### Products
+- *GET /api/products* - gets all the products with their categories
+- *GET /api/products/:id* - gets single product details
+- *GET /api/products/:id/sizes* - gets all available sizes for one product
+- *GET /api/products/:id/colors* - gets all available colors for one product
+
+#### Authentification
+![Screenshot of the project](/github_assets/ss2.png)
+- *POST /api/signup* - registers new user into the database (password is hashed), checks if it already exists
+- *POST /api/login* - logs the user in, checks for matching password, starts session
+- *POST /api/logout* - logs the user out, destroys session
+- *GET /api/check-session* - checks if the user is logged in
+
+## Next Steps ➡️
+The next step is enabling the shopping cart and checkout.
+
+  
 
 
