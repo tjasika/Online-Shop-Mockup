@@ -32,15 +32,15 @@ The **AppRoutes** component connects all the other components together and passe
 Every page has an **AppHeader.jsx** component, that displays the main title and nav buttons: *account, saved* and *cart* (but the 'saved' button is there only for display, it doesn't actually do anything).
 
 #### Products Display and Filtering
-The **App.jsx** component is basically the 'main page'. Each product is displayed in a **Card.jsx** component, which shows its primary image, name and price. When hovered, the image fades into the secondary image.
-The filtering logic is the same as in my "Cocktails" project: made with **useState** and **useMemo** hooks. (https://github.com/tjasika/Cocktails)
+The **App.jsx** component is basically the 'main page'. Each product is displayed in a **Card.jsx** component, which shows its primary image, name and price. When hovered, the image fades into the secondary image.  
+The filtering logic is the same as in my "Cocktails" project: made with **useState** and **useMemo** hooks. (https://github.com/tjasika/Cocktails)  
 I do not own the images, I downloaded them from Pinterest and stored them in a cloud with **Cloudinary**, then just stored those links in my database for the image src.
 ![Screenshot of the project](/github_assets/ss1.png)
 
 #### Details Page
 The **Details.jsx** displays the product in detail, showing its image, name, price, as well as available colors and sizes, from which the user chooses.
 ![Screenshot of the project](/github_assets/ss3.png)
-(I still need to add the feature of displaying multiple images)
+(I still need to add the feature of displaying multiple images)  
 
 The styling and the design are definitely not the most UX friendly - it was not my main focus for this project.
 
