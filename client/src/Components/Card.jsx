@@ -9,7 +9,7 @@ export const Card = ({id, name, image, image2, price}) => {
                     <img className="object-cover w-full h-full  inset-0 absolute transition-opacity duration-300 opacity-0 group-hover:opacity-100" src={image2} /> 
                 </div>
                 <div className="flex flex-col gap-1">
-                    <span className="uppercase">{name}</span>
+                    <span className="uppercase truncate h-5">{name}</span>
                     <span className="font-medium">$ {price}</span>
                 </div>
             </div>
