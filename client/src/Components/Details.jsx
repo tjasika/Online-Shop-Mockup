@@ -86,7 +86,7 @@ export default function Details(){
                         <h1 className="uppercase text-3xl">{product.name}</h1>
                         <h2 className="text-3xl font-medium">$ {product.price}</h2>
 
-                        <div className="grid grid-cols-4 gap-3 pt-5 pb-5 w-100 ">
+                        <div className="grid grid-cols-4 gap-3 pt-5 pb-5 w-150 ">
                             {sizes.map((size) => (
                                 <button 
                                     className={selectedSize === size.Id ? "bg-zinc-700 text-white rounded-xl w-20" : "border-1 rounded-xl w-20 hover:cursor-pointer hover:bg-zinc-700 hover:text-white"} 
@@ -97,9 +97,14 @@ export default function Details(){
                             ))}
                         </div>
                        
-                        <div>
+                        <div className="grid grid-cols-4 gap-3 pt-5 pb-5 w-150">
                             {colors.map((color) => (
-                                <h1 key={color.Id}>{color.Name}</h1>
+                                <button
+                                    className={selectedColor === color.Id ? "underline" : "hover:cursor-pointer"}
+                                    key={color.Id}
+                                    onClick={()=> setSelectedColor(color.Id)}>
+                                    {color.Name}
+                                </button>
                             ))}
                         </div>
                         
