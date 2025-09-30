@@ -2,7 +2,7 @@ import { useState } from "react";
 import { AppHeader } from "./AppHeader"
 import { useNavigate } from "react-router-dom"
 
-export default function Cart({cartItems, removeFromCart, updateQuantity}) {
+export default function Cart({cartItems, removeFromCart, updateQuantity, isLoggedIn}) {
     const navigate = useNavigate();
     console.log("Cart items:", cartItems);
 
@@ -33,7 +33,7 @@ export default function Cart({cartItems, removeFromCart, updateQuantity}) {
     return (
         <>
             <div className='pt-6 pb-6 pl-20 pr-20'>
-                <AppHeader />
+                <AppHeader isLoggedIn={isLoggedIn}/>
 
                 <h1 className="font-instrument font-medium text-3xl pb-3 pt-5">Shopping Cart</h1>
                 <button onClick={()=>navigate('/')} className="hover:cursor-pointer">

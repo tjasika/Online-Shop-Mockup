@@ -120,11 +120,11 @@ export const AppRoutes = () => {
         <Routes>
             <Route path="/" element={<App user={user} isLoggedIn={isLoggedIn}/>} />
             <Route path="/saved" element={<Navigate to="/" replace />} />
-            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess}/>} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
-            <Route path="/cart" element={isLoggedIn ? <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/> : <Navigate to="/login" replace />} />
-            <Route path="/products/:id" element={<Details addToCart={addToCart}/>} />
+            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} isLoggedIn={isLoggedIn}/>} />
+            <Route path="/signup" element={<Signup isLoggedIn={isLoggedIn}/>} />
+            <Route path="/account" element={<Account user={user} onLogout={handleLogout} isLoggedIn={isLoggedIn}/>} />
+            <Route path="/cart" element={isLoggedIn ? <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} isLoggedIn={isLoggedIn}/> : <Navigate to="/login" replace />} />
+            <Route path="/products/:id" element={<Details addToCart={addToCart} isLoggedIn={isLoggedIn}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )

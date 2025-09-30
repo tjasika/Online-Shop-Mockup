@@ -3,7 +3,7 @@ import { AppHeader } from "./AppHeader";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-export default function Details({addToCart}){
+export default function Details({addToCart, isLoggedIn}){
     const {id} = useParams();
     const navigate = useNavigate();
 
@@ -66,7 +66,7 @@ export default function Details({addToCart}){
         <>
             <div className="pt-6 pb-6 pl-20 pr-20">
                 <div className="pb-3">
-                    <AppHeader />
+                    <AppHeader isLoggedIn={isLoggedIn}/>
                     <button 
                         onClick={()=>navigate('/')}
                         className="hover:cursor-pointer"
