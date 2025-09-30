@@ -40,6 +40,10 @@ export default function Cart({cartItems, removeFromCart, updateQuantity}) {
                                         <button onClick={()=>updateQuantity(item.cart_item_id, item.quantity - 1)} className="hover:cursor-pointer"><img src="/icons/dash.svg"></img></button>
                                     </div>
                                 </div>
+                                <div className="flex flex-col justify-center ml-3">
+                                    <span className="pb-2">Total:</span>
+                                    <span>{item.product_price * item.quantity}</span>
+                                </div>
                             </div>
                         ))}
                         </div>
