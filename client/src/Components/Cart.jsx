@@ -10,7 +10,7 @@ export default function Cart({cartItems}) {
             <div className='pt-6 pb-6 pl-20 pr-20'>
                 <AppHeader />
 
-                <h1 className="font-instrument font-medium text-3xl pb-3 pt-5">Cart</h1>
+                <h1 className="font-instrument font-medium text-3xl pb-3 pt-5">Shopping Cart</h1>
                 <button onClick={()=>navigate('/')} className="hover:cursor-pointer">
                     <img src="/icons/arrow-return-left.svg"></img>
                 </button>

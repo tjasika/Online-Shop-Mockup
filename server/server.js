@@ -176,6 +176,34 @@ app.get('/api/check-session', (req, res) => {
     }
 })
 
+app.get('/api/cart/:customerId', (req, res) => {
+    const customerId = req.params.customerId;
+    const query = `
+        SELECT 
+            ci.cart_item_id,
+            ci.product_id,
+            ci.size_id,
+            ci.color_id,
+            ci.quantity,
+            p.Name as product_name,
+            p.Price as product_price,
+            p.Primary_img_url as product_image,
+            s.Name as size_name,
+            c.Name as color_name
+        FROM cart_items ci
+        JOIN Product p ON ci.product_id = p.Id
+        JOIN Size s ON ci.size_id = s.Id
+        JOIN Color c ON ci.color_id = c.Id
+        WHERE ci.customer_id = ?
+    `
+    db.query(query, [customerId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+        res.json(results);
+    })
+});
+
 //POST Routes
 app.post('/api/signup', async (req, res) => {
     try {
@@ -250,6 +278,34 @@ app.post('/api/logout', (req, res) => {
         res.clearCookie('connect.sid');
         res.json({ message: 'Logout successful' });
     });
+});
+
+app.post('/api/cart', (req, res) => {
+    const { customerId, productId, sizeId, colorId, quantity } = req.body;
+
+    const query = `SELECT * FROM cart_items WHERE customer_id = ? AND product_id = ? AND size_id = ? AND color_id = ?`;
+    db.query(query, [customerId, productId, sizeId, colorId], (err, results) => {
+        if (err) {
+            return res.status(500).json({ error: 'Database error' });
+        }
+        if(results.length > 0) { //if item already in the cart
+            const updateQuery = `UPDATE cart_items SET quantity = quantity + ? WHERE cart_item_id = ?`;
+            db.query(updateQuery, [quantity, results[0].cart_item_id], (err) => {
+                if(err) {
+                    return res.status(500).json({ error: 'Failed to update cart' });
+                } 
+                res.json({ message: 'Cart updated' });
+            })
+        } else {
+            const insertQuery = `INSERT INTO cart_items (customer_id, product_id, size_id, color_id, quantity) VALUES (?, ?, ?, ?, ?)`;
+            db.query(insertQuery, [customerId, productId, sizeId, colorId, quantity], (err) => {
+                if(err) {
+                    return res.status(500).json({ error: 'Failed to update cart' });
+                }
+                res.json({ message: 'Added to cart.' })
+            })
+        }
+    })
 })
 
 app.listen(5000, () => {
