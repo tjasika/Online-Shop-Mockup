@@ -112,10 +112,20 @@ export default function Cart({cartItems, removeFromCart, updateQuantity}) {
                                 <span>Total: </span>
                                 <span className="text-2xl font-medium">${total}</span>
                             </div>
+
                             <div>
                                 <span className="italic">Add coupon code</span>
-                                <input type="text"></input>
+                                <input 
+                                    value={discountCode}
+                                    onChange={(e) => setDiscountCode(e.target.value)}
+                                    placeholder="Discount code"
+                                    className="border-1 rounded-sm pl-1"
+                                />
+                                <button 
+                                    className="ml-3 hover:cursor-pointer hover:underline"
+                                    onClick={handleApplyDiscount}>Apply</button>
                             </div>
+
                             <div className="pt-10 flex justify-center w-full">
                                 <button className="bg-zinc-700 text-white border-zinc-900 p-3 rounded-xl w-70 hover:cursor-pointer hover:bg-zinc-600">CHECKOUT NOW</button>
                             </div>
