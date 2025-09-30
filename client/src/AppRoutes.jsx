@@ -54,7 +54,7 @@ export const AppRoutes = () => {
       
     };
 
-    const addToCart = async (product, sizeId, sizeName, colorId, colorName, quantity = 1) => {
+    const addToCart = async (product, sizeId, colorId, quantity = 1) => {
       if(!isLoggedIn) {
         alert('Please log in to add items to cart.');
         return;

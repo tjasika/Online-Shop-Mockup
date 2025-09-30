@@ -117,10 +117,7 @@ export default function Details({addToCart}){
                                             alert('Please select a color and size.');
                                             return;
                                         }
-                                        const size = sizes.find(s => s.Id === selectedSize);
-                                        const color = colors.find(c => c.Id === selectedColor);
-
-                                        addToCart(product, selectedSize, size.Name, selectedColor, color.Name)
+                                        addToCart(product, selectedSize, selectedColor)
                                         }
                                     }>
                                 Add to cart

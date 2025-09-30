@@ -16,15 +16,22 @@ export default function Cart({cartItems, removeFromCart, updateQuantity}) {
                 </button>
 
                 <div>
-                    {cartItems.map((item, index)=> (
-                        <div key={index}>
-                            <h3>{item.productName}</h3>
-                            <p>Price: ${item.productPrice}</p>
-                            <p>Size: {item.sizeName}</p>
-                            <p>Color: {item.colorName}</p>
-                            <p>Quantity: {item.quantity}</p>
-                        </div>
-                    ))}
+                    {cartItems.lenghth === 0 ? (
+                        <span>Shopping cart is empty.</span>
+                    ) : (
+                        <>
+                        {cartItems.map((item) => (
+                            <div key={item.cart_item_id}>
+                                <img src={item.product_image} alt={item.product_name} className="w-20 h-20 object-cover" />
+                                <h3>{item.product_name}</h3>
+                                <p>Price: ${item.product_price}</p>
+                                <p>Size: {item.size_name}</p>
+                                <p>Color: {item.color_name}</p>
+                                <p>Quantity: {item.quantity}</p>
+                            </div>
+                        ))}
+                        </>
+                    )}
                 </div>
             </div>
         </>
