@@ -21,6 +21,7 @@ This is a full-stack e-commerce website mockup, built with **React.js** for fron
 ## Database
 I started by creating a database in **mySQL workbench**. It consists of 7 main and 2 junction tables, as seen in the ER model below:
 ![Database ER model](/github_assets/db.png)
+The *cart-items* table was added later, when I remembered I needed to keep the cart persistent and linked to the user.
 For the sake of the project, the products, colors and sizes (as well as the junction tables) are *hard-coded* into the database. Since I didn't do role-based authentification, the app only works from a customer's perspective.
 
 ## Front-end (React.js)
