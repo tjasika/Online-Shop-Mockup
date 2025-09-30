@@ -108,11 +108,13 @@ export default function Cart({cartItems, removeFromCart, updateQuantity}) {
                                     <span>${deliveryFee}</span>
                                 </div>
                             </div>
-                            <div className="pb-10">
+                            <div className="pb-10 flex justify-between w-70">
+                                <span>Total: </span>
                                 <span className="text-2xl font-medium">${total}</span>
                             </div>
                             <div>
-                                <button className="italic hover:underline hover:cursor-pointer">Add coupon code</button>
+                                <span className="italic">Add coupon code</span>
+                                <input type="text"></input>
                             </div>
                             <div className="pt-10 flex justify-center w-full">
                                 <button className="bg-zinc-700 text-white border-zinc-900 p-3 rounded-xl w-70 hover:cursor-pointer hover:bg-zinc-600">CHECKOUT NOW</button>
