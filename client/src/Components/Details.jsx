@@ -3,7 +3,7 @@ import { AppHeader } from "./AppHeader";
 import { useState, useEffect } from "react";
 import axios from 'axios';
 
-export default function Details(addToCart){
+export default function Details({addToCart}){
     const {id} = useParams();
     const navigate = useNavigate();
 
@@ -111,7 +111,18 @@ export default function Details(addToCart){
                         <div>
                             <button 
                                 className="w-80 h-10 bg-zinc-700 text-white rounded-xl hover:cursor-pointer"
-                                onClick={()=> addToCart(product.Id, size.Id, color.Id)}>
+                                onClick={
+                                    ()=> {
+                                        if(selectedColor === null || selectedSize === null) {
+                                            alert('Please select a color and size.');
+                                            return;
+                                        }
+                                        const size = sizes.find(s => s.Id === selectedSize);
+                                        const color = colors.find(c => c.Id === selectedColor);
+
+                                        addToCart(product, selectedSize, size.Name, selectedColor, color.Name)
+                                        }
+                                    }>
                                 Add to cart
                             </button>
                         </div>

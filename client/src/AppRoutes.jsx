@@ -51,11 +51,16 @@ export const AppRoutes = () => {
     //Cart
     const[cartItems, setCartItems] = useState([]);
 
-    const addToCart = (productId, sizeId, colorId, quantity = 1) => {
+    const addToCart = (product, sizeId, sizeName, colorId, colorName, quantity = 1) => {
       const newItem = {
-        productId: productId,
-        sizeId: sizeId, 
+        productId: product.id,
+        productName: product.name,
+        productPrice: product.price,
+        productImage: product.image,
+        sizeId: sizeId,
+        sizeName: sizeName,
         colorId: colorId,
+        colorName: colorName,
         quantity: quantity
       };
       setCartItems([...cartItems, newItem]);
@@ -68,8 +73,8 @@ export const AppRoutes = () => {
             <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess}/>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
-            <Route path="/cart" element={<Cart />} />
-            <Route path="/products/:id" element={<Details addTocart={addToCart}/>} />
+            <Route path="/cart" element={<Cart cartItems={cartItems}/>} />
+            <Route path="/products/:id" element={<Details addToCart={addToCart}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )
