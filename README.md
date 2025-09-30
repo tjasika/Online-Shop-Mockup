@@ -41,7 +41,12 @@ I do not own the images, I downloaded them from Pinterest and stored them in a c
 ### Details Page
 The **Details.jsx** displays the product in detail, showing its image, name, price, as well as available colors and sizes, from which the user chooses.
 ![Screenshot of the project](/github_assets/ss3.png)
-(I still need to add the feature of displaying multiple images)  
+(I still need to add the feature of displaying multiple images)
+
+### Shopping Cart
+**ShoppingCart.jsx** displays the items the user placed in the cart. They can be added, removed, or have their quantity changed. Of course, quantity cannot go below zero. The user can also only open the shopping cart page if they're logged in - if they're not, it either sends an alert or redirects them to the login page.  
+On the right side I have displayed the money amounts: *subtotal, discount, shipping fee* and in the bottom the *total* amount. The user can add a coupon code to get a discount - this doesn't save in the database, I only made it for the fun of it, to make it more 'real-life' like. The codes are hard-coded inside the component.  
+![Screenshot of the project](/github_assets/ss4.png)
 
 The styling and the design are definitely not the most UX friendly - it was not my main focus for this project.
 
