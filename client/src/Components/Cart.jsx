@@ -1,7 +1,7 @@
 import { AppHeader } from "./AppHeader"
 import { useNavigate } from "react-router-dom"
 
-export default function Cart({cartItems}) {
+export default function Cart({cartItems, removeFromCart, updateQuantity}) {
     const navigate = useNavigate();
     console.log("Cart items:", cartItems);
 

@@ -10,8 +10,11 @@ import Account from './Components/Account.jsx';
 
 export const AppRoutes = () => {
     const navigate = useNavigate();
+
+    //State Variables
     const [user, setUser] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const[cartItems, setCartItems] = useState([]);
 
     useEffect(() => {
       const checkSession = async () => {
@@ -20,6 +23,9 @@ export const AppRoutes = () => {
           if (response.data.isLoggedIn) {
             setUser(response.data.user);
             setIsLoggedIn(true);
+
+            const cartResponse = await axios.get(`http://localhost:5000/api/cart/${response.data.user.id}`);
+            setCartItems(cartResponse.data);
           }
         } catch (error) {
           console.log('No active session');
@@ -48,22 +54,60 @@ export const AppRoutes = () => {
       
     };
 
-    //Cart
-    const[cartItems, setCartItems] = useState([]);
+    const addToCart = async (product, sizeId, sizeName, colorId, colorName, quantity = 1) => {
+      if(!isLoggedIn) {
+        alert('Please log in to add items to cart.');
+        return;
+      }
 
-    const addToCart = (product, sizeId, sizeName, colorId, colorName, quantity = 1) => {
-      const newItem = {
-        productId: product.id,
-        productName: product.name,
-        productPrice: product.price,
-        productImage: product.image,
-        sizeId: sizeId,
-        sizeName: sizeName,
-        colorId: colorId,
-        colorName: colorName,
-        quantity: quantity
-      };
-      setCartItems([...cartItems, newItem]);
+      try {
+        await axios.post('http://localhost:5000/api/cart', {
+          customerId: user.id,
+          productId: product.id,
+          sizeId,
+          colorId,
+          quantity
+        });
+
+        const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user.id}`);
+        setCartItems(cartResponse.data);
+        alert('Item added to cart!');
+      } catch(err) {
+        if(err) {
+          console.error('Add to cart error:', err);
+          alert('Failed to add item to cart');
+        }
+      }
+    }
+
+    const removeFromCart = async (cartItemId) => {
+      try {
+        await axios.delete(`http://localhost:5000/api/cart/${cartItemId}`);
+        const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user.id}`);
+        setCartItems(cartResponse.data);
+
+      } catch(err) {
+        if(err) {
+          console.error('Remove from cart error:', err);
+          alert('Failed to remove item from cart');
+        }
+      }
+    }
+
+    const updateQuantity = async (cartItemId, newQuantity) => {
+      try {
+        await axios.put(`http://localhost:5000/api/cart/${cartItemId}`, {
+          quantity: newQuantity,
+        });
+        const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user.id}`);
+        setCartItems(cartResponse.data);
+
+      } catch(err) {
+        if(err) {
+          console.error('Update error:', err);
+          alert('Failed to update quantity.');
+        }
+      }
     }
 
     return (
@@ -73,9 +117,9 @@ export const AppRoutes = () => {
             <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess}/>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
-            <Route path="/cart" element={<Cart cartItems={cartItems}/>} />
+            <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>} />
             <Route path="/products/:id" element={<Details addToCart={addToCart}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
     )
-}
+  }
