@@ -302,9 +302,45 @@ app.post('/api/cart', (req, res) => {
                 if(err) {
                     return res.status(500).json({ error: 'Failed to update cart' });
                 }
-                res.json({ message: 'Added to cart.' })
+                res.json({ message: 'Added to cart.'})
             })
         }
+    })
+})
+
+// DELETE and PUT routes
+app.delete('/api/cart/:cartItemId', (req, res) => {
+    const cartItemId = req.params.cartItemId;
+    const query = `DELETE FROM cart_items WHERE cart_item_id = ?`
+    db.query(query, [cartItemId], (err) => {
+        if(err) {
+            return res.status(500).json({ error: 'Failed to remove item' });
+        }
+        res.json({ message: 'Item removed from cart' });
+    })
+})
+
+app.put('/api/cart/:cartItemId', (req, res) => {
+    const cartItemId = req.params.cartItemId;
+    const { quantity } = req.body;
+    const query = `UPDATE cart_items SET quantity = ? WHERE  cart_item_id = ?`;
+
+    db.query(query, [quantity, cartItemId], (err) => {
+        if(err) {
+            return res.status(500).json({message: "Failed to update quantity."});
+        }
+        res.json({message: "Quantity updated."});
+    })
+})
+
+app.delete('/api/cart/clear/:customerId', (req, res)=> {
+    const customerId = req.params.customerId;
+    const query = `DELETE FROM cart_items WHERE customer_id = ?`;
+    db.query(query, [customerId], (err) => {
+        if(err) {
+            return res.status(500).json({message: "Failed to clear cart."});
+        }
+        res.json({message: "Cart cleared."});
     })
 })
 
