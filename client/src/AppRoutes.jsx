@@ -81,17 +81,20 @@ export const AppRoutes = () => {
     }
 
     const removeFromCart = async (cartItemId) => {
-      try {
-        await axios.delete(`http://localhost:5000/api/cart/${cartItemId}`);
-        const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user.id}`);
-        setCartItems(cartResponse.data);
+      if(window.confirm('Remove from cart?')) {
+        try {
+          await axios.delete(`http://localhost:5000/api/cart/${cartItemId}`);
+          const cartResponse = await axios.get(`http://localhost:5000/api/cart/${user.id}`);
+          setCartItems(cartResponse.data);
 
-      } catch(err) {
-        if(err) {
-          console.error('Remove from cart error:', err);
-          alert('Failed to remove item from cart');
+        } catch(err) {
+          if(err) {
+            console.error('Remove from cart error:', err);
+            alert('Failed to remove item from cart');
+          }
         }
       }
+      
     }
 
     const updateQuantity = async (cartItemId, newQuantity) => {

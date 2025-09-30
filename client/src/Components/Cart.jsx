@@ -35,14 +35,23 @@ export default function Cart({cartItems, removeFromCart, updateQuantity}) {
                                 <div className="flex flex-col justify-center ml-3">
                                     <span className="pb-2">Quantity:</span>
                                     <div className="border-1 rounded-3xl flex flex-row gap-4 w-30 p-2 justify-center">
-                                        <button onClick={()=>updateQuantity(item.cart_item_id, item.quantity - 1)} className="hover:cursor-pointer"><img src="/icons/dash.svg"></img></button>
+                                        <button onClick={()=>updateQuantity(item.cart_item_id, item.quantity - 1)} className="hover:cursor-pointer">
+                                            <img src="/icons/dash.svg"></img>
+                                        </button>
                                         <span>{item.quantity}</span>
-                                        <button onClick={()=>updateQuantity(item.cart_item_id, item.quantity + 1)} className="hover:cursor-pointer"><img src="/icons/plus.svg"></img></button>
+                                        <button onClick={()=>updateQuantity(item.cart_item_id, item.quantity + 1)} className="hover:cursor-pointer">
+                                            <img src="/icons/plus.svg"></img>
+                                        </button>
                                     </div>
                                 </div>
                                 <div className="flex flex-col justify-center ml-3">
                                     <span className="pb-2">Total:</span>
                                     <span className="text-xl font-medium">$ {item.product_price * item.quantity}</span>
+                                </div>
+                                <div className="flex flex-col justify-center ml-3">
+                                    <button onClick={() => removeFromCart(item.cart_item_id)} className="hover:cursor-pointer">
+                                        <img src="/icons/trash.svg"></img>
+                                    </button>
                                 </div>
                             </div>
                         ))}
