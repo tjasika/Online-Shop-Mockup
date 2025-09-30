@@ -95,6 +95,9 @@ export const AppRoutes = () => {
     }
 
     const updateQuantity = async (cartItemId, newQuantity) => {
+      if(newQuantity < 1) {
+        newQuantity = 1;
+      }
       try {
         await axios.put(`http://localhost:5000/api/cart/${cartItemId}`, {
           quantity: newQuantity,
