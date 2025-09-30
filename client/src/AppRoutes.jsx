@@ -123,7 +123,7 @@ export const AppRoutes = () => {
             <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess}/>} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout}/>} />
-            <Route path="/cart" element={<Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/>} />
+            <Route path="/cart" element={isLoggedIn ? <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity}/> : <Navigate to="/login" replace />} />
             <Route path="/products/:id" element={<Details addToCart={addToCart}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
