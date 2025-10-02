@@ -100,7 +100,7 @@ export default function Details({addToCart, isLoggedIn}){
                         <div className="grid grid-cols-4 gap-3 pt-5 pb-5 w-150">
                             {colors.map((color) => (
                                 <button
-                                    className={selectedColor === color.Id ? "underline" : "hover:cursor-pointer"}
+                                    className={selectedColor === color.Id ? "underline" : "hover:cursor-pointer hover:underline"}
                                     key={color.Id}
                                     onClick={()=> setSelectedColor(color.Id)}>
                                     {color.Name}

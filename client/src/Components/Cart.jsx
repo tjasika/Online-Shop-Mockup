@@ -27,8 +27,8 @@ export default function Cart({cartItems, removeFromCart, updateQuantity, isLogge
     }
 
     const subtotal = cartItems.reduce((sum, item) => sum + (item.product_price * item.quantity), 0);
-    const discountAmount = subtotal * appliedDiscount;
-    const total = subtotal - discountAmount + deliveryFee;
+    const discountAmount = (subtotal * appliedDiscount).toFixed(2);
+    const total = (subtotal - discountAmount + deliveryFee).toFixed(2);
 
     return (
         <>
@@ -127,7 +127,11 @@ export default function Cart({cartItems, removeFromCart, updateQuantity, isLogge
                             </div>
 
                             <div className="pt-10 flex justify-center w-full">
-                                <button className="bg-zinc-700 text-white border-zinc-900 p-3 rounded-xl w-70 hover:cursor-pointer hover:bg-zinc-600">CHECKOUT NOW</button>
+                                <button 
+                                    className="bg-zinc-700 text-white border-zinc-900 p-3 rounded-xl w-70 hover:cursor-pointer hover:bg-zinc-600"
+                                    onClick={()=>navigate('/checkout')}>
+                                    CHECKOUT NOW
+                                </button>
                             </div>
                             
                         </div>
