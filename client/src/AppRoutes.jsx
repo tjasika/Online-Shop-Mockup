@@ -7,6 +7,7 @@ import Login from './Components/Login.jsx';
 import App from './App.jsx';
 import Signup from './Components/Signup.jsx';
 import Account from './Components/Account.jsx';
+import Checkout from './Components/Checkout.jsx';
 
 export const AppRoutes = () => {
     const navigate = useNavigate();
@@ -124,6 +125,7 @@ export const AppRoutes = () => {
             <Route path="/signup" element={<Signup isLoggedIn={isLoggedIn}/>} />
             <Route path="/account" element={<Account user={user} onLogout={handleLogout} isLoggedIn={isLoggedIn}/>} />
             <Route path="/cart" element={isLoggedIn ? <Cart cartItems={cartItems} removeFromCart={removeFromCart} updateQuantity={updateQuantity} isLoggedIn={isLoggedIn}/> : <Navigate to="/login" replace />} />
+            <Route path="/checkout" element={isLoggedIn ? <Checkout isLoggedIn={isLoggedIn}/> : <Navigate to="/login" replace />} />
             <Route path="/products/:id" element={<Details addToCart={addToCart} isLoggedIn={isLoggedIn}/>} />
             <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
